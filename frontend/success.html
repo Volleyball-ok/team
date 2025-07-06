@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You're Registered!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-green-100 to-blue-50 min-h-screen flex items-center justify-center text-gray-800">
+
+  <main class="bg-white p-10 rounded-xl shadow-xl max-w-xl w-full text-center">
+    <h1 class="text-4xl font-bold text-green-600 mb-4">✅ Registration Complete!</h1>
+    <p class="text-lg mb-6">Thanks for registering your team. We can’t wait to see you on the sand! 🏐</p>
+
+    <div class="bg-gray-100 p-4 rounded-lg text-left mb-6" id="teamSummary">
+      <!-- Populated by JS -->
+    </div>
+
+    <a href="index.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition">
+      Back to Home
+    </a>
+  </main>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem('registration'));
+
+    if (data) {
+      const { teamName, captainName, players, pizza, pop } = data;
+      document.getElementById('teamSummary').innerHTML = `
+        <p><strong>Team Name:</strong> ${teamName}</p>
+        <p><strong>Captain:</strong> ${captainName}</p>
+        <p><strong>Players:</strong> ${players.join(', ')}</p>
+        <p><strong>Pizza:</strong> ${pizza || 'No preference'}</p>
+        <p><strong>Pop:</strong> ${pop}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volleyball Tournament in Your City</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+  <!-- HERO VIDEO SECTION -->
+  <section class="w-full h-[50vh] relative overflow-hidden">
+    <video autoplay muted loop class="absolute w-full h-full object-cover">
+      <source src="https://cdn.pixabay.com/video/2015/10/09/921-141890445_medium.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-2">🏐 Okanagan Summer Volleyball Cup</h1>
+      <p class="text-lg font-medium mb-2">Vernon – Saturday, July 26, 2025<br>Kelowna – Sunday, July 27, 2025</p>
+      <div class="text-xl font-semibold" id="countdown"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="py-12 px-6 md:px-20 text-center bg-gradient-to-b from-blue-50 to-white">
+    <h2 class="text-3xl font-bold text-purple-700 mb-6">What’s the Vibe?</h2>
+    <p class="text-lg mb-6 max-w-3xl mx-auto">
+      Join us for an epic weekend of beach volleyball in Vernon and Kelowna — fun, music, sunshine, cash prizes, and food 🍕🥤💵
+    </p>
+    <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text-left">
+      <div>
+        <h3 class="text-xl font-semibold">🍕 Pizza & Pop</h3>
+        <p>Every team gets complimentary pizza and drinks. No one plays hungry!</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold">💵 Cash Prize</h3>
+        <p>Top teams walk away with cash. Compete for glory AND money.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold">🌴 Beach Vibes</h3>
+        <p>Held on real sand courts — music, sun, and an awesome local crowd.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BUTTON -->
+  <section class="text-center py-10">
+    <a href="register.html" class="inline-block bg-purple-700 text-white text-xl font-bold py-4 px-8 rounded hover:bg-purple-800 transition">
+      Register Your Team Now
+    </a>
+  </section>
+
+  <script>
+    // Countdown to Vernon - July 26, 2025
+    const countdownEl = document.getElementById('countdown');
+    const targetDate = new Date("2025-07-26T09:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownEl.innerText = `⏳ ${days}d ${hours}h ${mins}m ${secs}s left until Vernon!`;
+    }, 1000);
+  </script>
+</body>
+</html>

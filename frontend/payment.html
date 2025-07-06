@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirm & Pay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen text-gray-800">
+
+  <!-- HEADER -->
+  <header class="text-center py-10 bg-blue-700 text-white shadow-md">
+    <h1 class="text-4xl font-bold">Confirm Your Registration</h1>
+    <p class="mt-2 text-lg">Let’s make it official!</p>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg mt-8 p-8 space-y-6">
+    <div>
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Team Summary</h2>
+      <div id="summary" class="space-y-2 text-gray-700">
+        <!-- Content will be inserted by JS -->
+      </div>
+    </div>
+
+    <button
+      id="payBtn"
+      class="w-full bg-purple-700 text-white p-4 rounded text-lg font-bold hover:bg-purple-800 transition">
+      Continue to Payment
+    </button>
+  </main>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem('registration'));
+    const summary = document.getElementById('summary');
+
+    if (!data) {
+      summary.innerHTML = "<p class='text-red-600'>No registration data found. Please go back and fill the form again.</p>";
+      document.getElementById('payBtn').style.display = "none";
+    } else {
+      const { teamName, captainName, players, phone, email, pizza, pop } = data;
+      summary.innerHTML = `
+        <p><strong>Team Name:</strong> ${teamName}</p>
+        <p><strong>Captain:</strong> ${captainName}</p>
+        <p><strong>Players:</strong> ${players.join(', ')}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Pizza:</strong> ${pizza || 'None selected'}</p>
+        <p><strong>Pop:</strong> ${pop}</p>
+      `;
+    }
+
+    document.getElementById('payBtn').addEventListener('click', () => {
+      // Square payment link – replace this with your actual link
+      window.location.href = "https://square.link/u/EdynZgnF";
+    });
+  </script>
+</body>
+</html>

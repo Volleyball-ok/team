@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team Registration - Volleyball Okanagan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: linear-gradient(to right, #fdfbfb, #ebedee);
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center py-12 px-4">
+
+  <main class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-2xl">
+    <div class="mb-8 text-center">
+      <h1 class="text-4xl font-extrabold text-gray-800">Register Your Team</h1>
+      <p class="mt-2 text-gray-500 text-sm">Volleyball Okanagan Tournament 2025</p>
+    </div>
+
+    <form id="registerForm" action="payment.html" method="GET" class="space-y-6">
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Team Name</label>
+        <input type="text" name="teamName" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Captain Name</label>
+        <input type="text" name="captainName" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Add Players (Max 3)</label>
+        <div id="playerList" class="space-y-2 mb-1"></div>
+        <button type="button" onclick="addPlayer()" class="text-purple-600 hover:underline text-sm font-medium">+ Add Player</button>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Contact Phone</label>
+        <input type="tel" name="phone" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Email Address</label>
+        <input type="email" name="email" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Pizza Preference</label>
+          <input type="text" name="pizza" placeholder="Optional" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Preferred Pop</label>
+          <input type="text" name="pop" placeholder="Optional" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+      </div>
+
+      <div class="pt-6 text-center">
+        <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition">
+          Continue to Payment
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    let playerCount = 0;
+
+    function addPlayer() {
+      if (playerCount >= 3) return;
+      const list = document.getElementById('playerList');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = `player${playerCount + 1}`;
+      input.placeholder = `Player ${playerCount + 1} Name`;
+      input.className = "w-full border border-gray-300 rounded-lg px-4 py-2";
+      list.appendChild(input);
+      playerCount++;
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+      const form = new FormData(this);
+      const players = [];
+      for (let i = 1; i <= 3; i++) {
+        const name = form.get(`player${i}`);
+        if (name) players.push(name);
+      }
+
+      const data = {
+        teamName: form.get('teamName'),
+        captainName: form.get('captainName'),
+        phone: form.get('phone'),
+        email: form.get('email'),
+        pizza: form.get('pizza'),
+        pop: form.get('pop'),
+        players: players
+      };
+
+      localStorage.setItem('registration', JSON.stringify(data));
+    });
+  </script>
+
+</body>
+</html>
